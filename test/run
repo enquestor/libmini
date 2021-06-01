@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+make $1
+LD_LIBRARY_PATH=.. ./"$1"
+make clean
