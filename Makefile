@@ -1,5 +1,7 @@
 .PHONY: clean pack
 
+ZIPNAME = 0713407_hw3
+
 all: libmini.so start.o
 
 libmini64.o: libmini64.asm
@@ -15,7 +17,11 @@ start.o: start.asm
 	yasm -f elf64 -DYASM -D__x86_64__ -DPIC $< -o $@
 
 clean:
-	rm *.o *.so
+	rm -f *.o *.so
 
 pack: clean
-	zip -r $(ZIPNAME) . -x ".git*" -x ".DS_Store"
+	mkdir ~/$(ZIPNAME)
+	cp -r * ~/$(ZIPNAME)
+	mv ~/$(ZIPNAME) .
+	zip -r $(ZIPNAME) $(ZIPNAME) -x ".git*" -x ".DS_Store"
+	rm -rf $(ZIPNAME)
